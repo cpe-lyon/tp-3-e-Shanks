@@ -110,4 +110,12 @@ Pour tester nos modifications, on créer un nouveau fichier et un nouveau dossie
 
 13 - Création d'un fichier fic pour l'exercice: **touch fic**
 * **chmod u=rx,g=wx,o=r fic** => **chmod 534 fic**
-* **chmod uo+w,g-rx fic** => **chmod 
+* **chmod uo+w,g-rx fic** => **chmod 602 fic**
+* **chmod 653 fic** => **chmod u=rw,g=rx,o=wx fic** ou **chmod u-x, g+r, o+w fic**
+* **chmod u+x,g=w,o-r fic** => **chmod 574 fic**
+
+14 - On peut afficher les droits sur le programme passwd via la commande **stat -c %A /usr/bin/passwd**. On remarque que l'utilisateur propriétaire (root) possède un droit "s" que les autres n'ont pas. Cela signifie que root possède SUID permission sur ce programme. C'est-à-dire que seul root peut exécuter ce programme.
+
+15 - (tuto en ligne)
+
+16 - (tuto en ligne)
