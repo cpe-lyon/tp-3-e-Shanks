@@ -75,11 +75,11 @@ Sur le fichier fichier, pour l'utilisateur propriétaire et le groupe propriéta
 2 - On retire tous les droits sur ce fichier avec la commande **chmod a-rwx fichier**. Même en étant root, il nous est impossible de modifier le fichier.
 
 3 - **chmod u+wx fichier**, **echo "echo Hello" > fichier**.
-Les droits sont respéctés ????????????????
+Les droits sont concervés.
 
 4 - **cat fichier** => permission denied
 **sudo cat fichier** => affiche bien le contenu
-On peut en déduire que root à toutes les permissions sur les fichiers mais pas sur les dossiers????????????????
+On peut en déduire que root à toutes les permissions sur les fichiers mais pas sur les dossiers.
 
 5 - Dans le dossier test, on se retire le droit de lecture sur ce dossier via **chmod u-r ../test**. On ne peut ni afficher le contenu du répertoire ni exécuter le fichier ficher. Cela peut s'expliquer par le fait que comme nous n'avons plus la permission de lire ce dossier mais que, comme nous sommes déjà à l'intérieur nous n'avons plus les autres permissions ce qui nous empêche d'agir.
 On rétablie le droit en lecture: **chmod u+r ../test**.
@@ -92,21 +92,21 @@ On rétablie le droit en lecture: **chmod u+r ../test**.
 * on rétablie le droit en écriture pour le dossier test: **chmod a+w ../test**
 * **echo "bonjour" > nouveau**: permission denied
 * **rm nouveau**: "remove write-protected regular empty file 'nouveau'?"; on peut donc supprimer en tapant "y".
-On peut alors déduire que ????????????????
+On peut en déduire que ??????????
 
 7 - Une fois positionné dans le répertoire personnel avec **cd ~**, on retire le droit d'exécution au dossier test via **chmod a-x test**. Après cette commande, il est impossible de se déplacer dans le répertoire test, d'y créer un nouveau fichier ou d'en modifier un. On peut en déduire que chaque action faite sur ce dossier n'est pas réalisable sans le droit d'exécution.
 
-8 - Rétablissement du droit d'exécution: **chmod a+x test**. On se positionne à l'intérieur puis on lui retir de nouveau ce droit: **chmod a-x ../test**. Une fois cette commande exécutée, on ne peut plus rien faire: plus afficher le contenu d'un fichier, d'en exécuter un, d'afficher le contenu du dossier courant, de se déplacer dans le dossier sstest. Les droits que l'on possède sur le répertoire courant ????????????????
-On peut cependant retourner dans le répertoire parent, ceci est du au fait ????????????????
+8 - Rétablissement du droit d'exécution: **chmod a+x test**. On se positionne à l'intérieur puis on lui retir de nouveau ce droit: **chmod a-x ../test**. Une fois cette commande exécutée, on ne peut plus rien faire: plus afficher le contenu d'un fichier, d'en exécuter un, d'afficher le contenu du dossier courant, de se déplacer dans le dossier sstest. Les droits que l'on possède sur le répertoire courant se répercutent sur les fichers/dossiers enfants?????????
+On peut cependant retourner dans le répertoire parent, ceci est du au fait ?????????
 
 9 - **chmod a+x test**. Pour attribuer au fichier fichier les droits suffisants pour qu'une autre personne de notre groupe puisse y accéder en lecture mais pas en écriture, on tape la commande **chmod g+r test/fichier** (si le droit d'exécution et d'écriture est déjà attribué au fichier, alors on les retire avec **chmod g-wx fichier**.
 
 10 - On retire les permissions pour tout le monde sauf pour nous: **umask g-rwx** et **umask o-rx** (on peut vérifier avec umask -S).
 Pour tester nos modifications, on créer un nouveau fichier et un nouveau dossier. On peut effectivement agir sur eux. Maintenant on se place sur le compte d'alice, par exemple, **sudo su alice**. Et en effet, on ne peut plus agir sur le nouveau fichier et le nouveau dossier en tant qu'une autre personne que le créateur du fichier et du dossier.
 
-11 - Même processus que la question précédente: **umask g+rx** et **umask o+rx**. Toutefois, ce n'est toujours pas possible ????????????????
+11 - Même processus que la question précédente: **umask g+rx** et **umask o+rx**.
 
-12 - c deja le cas ????????????????
+12 - **umask u=rwx** pour nous donner toutes les permissions et **umask g=r** pour donner le droit de lecture aux membres de mon groupe.
 
 13 - Création d'un fichier fic pour l'exercice: **touch fic**
 * **chmod u=rx,g=wx,o=r fic** => **chmod 534 fic**
